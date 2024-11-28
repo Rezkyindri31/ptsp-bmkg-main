@@ -95,7 +95,7 @@ const DialogPengirimanBuktiTransfer = ({
       <DialogHeader>Pengiriman Dokumen Transaksi {ID_Pemesanan}</DialogHeader>
       <DialogBody>
         <div className="w-full p-6 bg-white rounded-lg shadow-md">
-          <Typography variant="paragraph">Cek Deskripsi</Typography>
+          <Typography variant="paragraph">Deskripsi Kesalahan : </Typography>
           <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 mb-4 flex flex-col items-center justify-center">
             <input
               type="file"

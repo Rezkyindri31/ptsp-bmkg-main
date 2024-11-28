@@ -89,21 +89,7 @@ const useMasukanIKM = () => {
   );
 
   const handleIKMSubmit = async (pemesananId) => {
-    const generateRandomIDIKM = (length = 16) => {
-      const characters =
-        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_-+=<>?";
-      let result = "";
-      for (let i = 0; i < length; i++) {
-        result += characters.charAt(
-          Math.floor(Math.random() * characters.length)
-        );
-      }
-      return result;
-    };
-
     const penggunaSaatIni = localStorage.getItem("ID");
-    console.log("penggunaSaatIni:", penggunaSaatIni);
-    console.log("pemesananId:", pemesananId);
     if (!penggunaSaatIni) {
       toast.error("Anda harus masuk untuk mengirimkan IKM.");
       return;
@@ -111,24 +97,17 @@ const useMasukanIKM = () => {
 
     const ikmData = {
       Opsi_Yang_Dipilih: selectedOptions,
+      ikmResponses: responses,
     };
+
     try {
       const ikmRef = doc(firestore, "ikm", pemesananId);
       const docSnapshot = await getDoc(ikmRef);
 
       if (docSnapshot.exists()) {
-        await updateDoc(ikmRef, {
-          ikmResponses: responses,
-        });
+        await updateDoc(ikmRef, ikmData);
       } else {
-        await setDoc(
-          ikmRef,
-          {
-            ...ikmData,
-            ikmResponses: responses,
-          },
-          { merge: true }
-        );
+        await setDoc(ikmRef, ikmData, { merge: true });
       }
 
       const pemesananRef = doc(firestore, "pemesanan", pemesananId);

@@ -99,7 +99,9 @@ const DialogPerbaikanDokumen = ({ open, onClose, ajukanID, namaAjukan }) => {
           >
             {renderInstructions()}
           </Typography>
-          <Typography variant="paragraph">Cek Deskripsi</Typography>
+          <Typography variant="paragraph">
+            Deskripsi Kesalahannya : Disini
+          </Typography>
           <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 mb-4 flex flex-col items-center justify-center">
             <input
               type="file"
