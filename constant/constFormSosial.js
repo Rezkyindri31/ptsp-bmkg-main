@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 
 const KegiatanSosialForm = ({ onSubmit }) => {
   const [files, setFiles] = useState({});
+  const [loading, setLoading] = useState(false);
 
   const handleFileChange = (e) => {
     const { name, files: selectedFiles } = e.target;
@@ -17,12 +18,23 @@ const KegiatanSosialForm = ({ onSubmit }) => {
     e.preventDefault();
     const allFiles = Object.values(files).flat();
 
-    if (allFiles.length > 0) {
-      await onSubmit(allFiles, "Kegiatan Sosial");
-    } else {
+    if (allFiles.length === 0) {
       toast.error("Silakan pilih file untuk diunggah.");
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      await onSubmit(allFiles, "Kegiatan Soaial");
+      toast.success("File berhasil diunggah.");
+    } catch (error) {
+      toast.error("Terjadi kesalahan saat mengunggah file.");
+    } finally {
+      setLoading(false);
     }
   };
+
   return (
     <form
       onSubmit={handleFormSubmit}
@@ -47,8 +59,14 @@ const KegiatanSosialForm = ({ onSubmit }) => {
         </div>
       </div>
       <div className="text-center">
-        <Button color="blue" className="w-full" ripple="light" type="submit">
-          Ajukan Sekarang
+        <Button
+          color="blue"
+          className="w-full"
+          ripple="light"
+          type="submit"
+          disabled={loading}
+        >
+          {loading ? "Sedang Diproses..." : "Ajukan Sekarang"}
         </Button>
       </div>
     </form>

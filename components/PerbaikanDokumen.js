@@ -8,6 +8,7 @@ import {
   Typography,
 } from "@/app/MTailwind";
 import { FaTrash } from "react-icons/fa";
+import { toast, Toaster } from "react-hot-toast";
 import usePerbaikiDokumen from "@/hooks/Backend/usePerbaikanDokumen";
 
 const DialogPerbaikanDokumen = ({ open, onClose, ajukanID, namaAjukan }) => {
@@ -27,16 +28,19 @@ const DialogPerbaikanDokumen = ({ open, onClose, ajukanID, namaAjukan }) => {
     const validFiles = [];
 
     newFiles.forEach((file) => {
-      if (file.size > MAX_FILE_SIZE) {
-        console.log("File size exceeds limit.");
-        toast.error(`File maksimal hanya berukuran 2MB.`, {
-          position: "top-left",
-        });
-      } else if (!SUPPORTED_FORMATS.includes(file.type)) {
+      if (!SUPPORTED_FORMATS.includes(file.type)) {
         console.log("Unsupported file format.");
         toast.error(
-          `Format file tidak mendukung. Hanya .png, .jpg, dan .pdf yang diperbolehkan.`
+          `Format file tidak mendukung. Hanya .png, .jpg, dan .pdf yang diperbolehkan.`,
+          {
+            position: "top-right",
+          }
         );
+      } else if (file.size > MAX_FILE_SIZE) {
+        console.log("File size exceeds limit.");
+        toast.error(`File maksimal hanya berukuran 2MB.`, {
+          position: "top-right",
+        });
       } else {
         validFiles.push({
           name: file.name,
@@ -54,15 +58,24 @@ const DialogPerbaikanDokumen = ({ open, onClose, ajukanID, namaAjukan }) => {
   };
 
   const simpanPerbaikanDokumen = async () => {
+    setLoading(true);
+
     const rawFiles = files.map((file) => file.rawFile);
 
     if (!ajukanID || rawFiles.length === 0) {
-      alert("Please add files and ensure `ajukanID` is provided.");
+      setLoading(false);
+      toast.error("Tolong masukkan file terlebih dahulu.");
       return;
     }
 
-    await handlePerbaikiDokumen(ajukanID, rawFiles);
-    onClose();
+    try {
+      await handlePerbaikiDokumen(ajukanID, rawFiles);
+    } catch (error) {
+      toast.error("Terjadi kesalahan saat memperbaiki dokumen.");
+    } finally {
+      setLoading(false);
+      onClose();
+    }
   };
 
   const renderInstructions = () => {
@@ -88,11 +101,12 @@ const DialogPerbaikanDokumen = ({ open, onClose, ajukanID, namaAjukan }) => {
     <Dialog
       open={open}
       handler={onClose}
-      className="fixed inset-0 items-center justify-center w-96 h-auto mx-auto"
+      className="fixed inset-0 items-center justify-center w-96 h-auto mx-auto overflow-y-scroll"
     >
       <DialogHeader>Perbaiki Dokumen Ajukan #{ajukanID || "N/A"}</DialogHeader>
       <DialogBody>
-        <div className="w-full p-6 bg-white rounded-lg shadow-md">
+        <Toaster position="top-right" reverseOrder={false} />
+        <div className="w-full p-6 bg-white rounded-lg shadow-md ">
           <Typography
             variant="h5"
             className="text-lg font-semibold mb-4 text-red-900"

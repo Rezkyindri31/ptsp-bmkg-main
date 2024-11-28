@@ -152,6 +152,10 @@ const useAjukanFormSubmit = (keranjang) => {
               ID_Transaksi: generateRandomIDTransaksi(),
             }),
         };
+        pengarah.push("/Transaksi");
+        toast.success(
+          "Pengajuan berhasil dibuat dan ditambahkan ke pemesanan!"
+        );
         await setDoc(pemesananRef, pemesananData);
         console.log("Ajukan document written with ID:", randomIDAjukan);
         await updateDoc(keranjangRef, {
@@ -159,10 +163,6 @@ const useAjukanFormSubmit = (keranjang) => {
           Jasa: [],
           ID_Ajukan: deleteField(),
         });
-        pengarah.push("/Transaksi");
-        toast.success(
-          "Pengajuan berhasil dibuat dan ditambahkan ke pemesanan!"
-        );
       }
     } catch (error) {
       console.error("Gagal membuat pengajuan:", error);

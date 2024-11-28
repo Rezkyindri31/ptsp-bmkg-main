@@ -9,13 +9,21 @@ import { collection, setDoc, doc } from "firebase/firestore";
 export const addToPerusahaanCollection = async (formDataPerusahaan) => {
   try {
     const idPerusahaan = auth.currentUser?.uid;
-    if (!idPerusahaan) throw new Error("User not authenticated");
+    const emailPengguna = auth.currentUser?.email;
+
+    if (!idPerusahaan) throw new Error("User Tidak Terautentikasi");
+
+    const dataPerusahaan = {
+      ...formDataPerusahaan,
+      Email: emailPengguna,
+    };
 
     const perusahaanRef = doc(
       collection(firestore, "perusahaan"),
       idPerusahaan
     );
-    await setDoc(perusahaanRef, formDataPerusahaan);
+
+    await setDoc(perusahaanRef, dataPerusahaan);
 
     console.log("Document successfully written with ID: ", idPerusahaan);
     return perusahaanRef;

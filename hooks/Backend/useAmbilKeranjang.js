@@ -41,20 +41,31 @@ const useAmbilKeranjang = () => {
         return;
       }
 
-      if (!keranjang || (!Array.isArray(keranjang.Informasi) && !Array.isArray(keranjang.Jasa))) {
-        toast.error("Keranjang tidak ditemukan atau data keranjang tidak valid.");
+      if (
+        !keranjang ||
+        (!Array.isArray(keranjang.Informasi) && !Array.isArray(keranjang.Jasa))
+      ) {
+        toast.error(
+          "Keranjang tidak ditemukan atau data keranjang tidak valid."
+        );
         return;
       }
 
-      const totalItems = (Array.isArray(keranjang.Informasi) ? keranjang.Informasi.length : 0) + (Array.isArray(keranjang.Jasa) ? keranjang.Jasa.length : 0);
+      const totalItems =
+        (Array.isArray(keranjang.Informasi) ? keranjang.Informasi.length : 0) +
+        (Array.isArray(keranjang.Jasa) ? keranjang.Jasa.length : 0);
 
       if (index < 0 || index >= totalItems) {
         toast.error("Item tidak ditemukan di keranjang.");
         return;
       }
 
-      const updatedInformasi = Array.isArray(keranjang.Informasi) ? [...keranjang.Informasi] : [];
-      const updatedJasa = Array.isArray(keranjang.Jasa) ? [...keranjang.Jasa] : [];
+      const updatedInformasi = Array.isArray(keranjang.Informasi)
+        ? [...keranjang.Informasi]
+        : [];
+      const updatedJasa = Array.isArray(keranjang.Jasa)
+        ? [...keranjang.Jasa]
+        : [];
 
       if (index < updatedInformasi.length) {
         updatedInformasi.splice(index, 1);

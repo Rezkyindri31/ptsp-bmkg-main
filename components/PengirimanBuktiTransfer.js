@@ -18,8 +18,8 @@ const DialogPengirimanBuktiTransfer = ({
   ID_Transaksi,
 }) => {
   const [files, setFiles] = useState([]);
-  const { handlePengirimanBuktiTransfer, loading } =
-    usePengirimanBuktiTransfer();
+  const { handlePengirimanBuktiTransfer } = usePengirimanBuktiTransfer();
+  const [loading, setLoading] = useState(false);
   const MAX_FILE_SIZE = 2 * 1024 * 1024;
   const SUPPORTED_FORMATS = [
     "image/png",
@@ -65,13 +65,17 @@ const DialogPengirimanBuktiTransfer = ({
   };
 
   const simpanBuktiTransfer = async () => {
+    setLoading(true);
+
     if (!ID_Transaksi) {
       toast.error("ID Transaksi tidak ditemukan.");
+      setLoading(false);
       return;
     }
 
     if (files.length === 0) {
       toast.error("Tidak ada file yang dipilih.");
+      setLoading(false);
       return;
     }
 
@@ -83,6 +87,9 @@ const DialogPengirimanBuktiTransfer = ({
     } catch (error) {
       toast.error("Gagal mengirimkan dokumen.");
       console.error("Error uploading documents: ", error);
+    } finally {
+      setLoading(false);
+      onClose();
     }
   };
 
@@ -90,7 +97,7 @@ const DialogPengirimanBuktiTransfer = ({
     <Dialog
       open={open}
       handler={handleClose}
-      className="fixed inset-0 items-center justify-center w-96 h-auto mx-auto"
+      className="fixed inset-0 items-center justify-center w-96 h-auto mx-auto overflow-y-auto"
     >
       <DialogHeader>Pengiriman Dokumen Transaksi {ID_Pemesanan}</DialogHeader>
       <DialogBody>
@@ -133,7 +140,7 @@ const DialogPengirimanBuktiTransfer = ({
               </span>
             </label>
           </div>
-          <div className="space-y-2 mb-4">
+          <div className="space-y-2 mb-4 overflow-y-auto">
             {files.map((file, index) => (
               <div
                 key={index}

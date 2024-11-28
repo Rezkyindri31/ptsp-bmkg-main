@@ -123,6 +123,16 @@ function TampilanProfile() {
             <div className="grid grid-cols-1">
               <div>
                 <Typography variant="h6" className="mb-2">
+                  Email
+                </Typography>
+                <Typography className="mb-2">
+                  {detailPengguna?.Email}
+                </Typography>
+              </div>
+            </div>
+            <div className="grid grid-cols-1">
+              <div>
+                <Typography variant="h6" className="mb-2">
                   Email Perusahaan
                 </Typography>
                 <Typography className="mb-2">

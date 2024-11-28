@@ -206,6 +206,17 @@ function EditProfile() {
             </div>
             <div>
               <Typography variant="h6" className="mb-2">
+                Email
+              </Typography>
+              <Input
+                name="Email"
+                value={editedDetailPengguna.Email || ""}
+                onChange={handleInputChange}
+                className="input-custom"
+              />
+            </div>
+            <div>
+              <Typography variant="h6" className="mb-2">
                 Email Perusahaan
               </Typography>
               <Input

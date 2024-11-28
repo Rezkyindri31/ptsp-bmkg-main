@@ -7,6 +7,7 @@ import {
   FaArrowLeftLong,
   FaArrowRightLong,
   FaCartShopping,
+  FaCircleInfo,
 } from "react-icons/fa6";
 import {
   Card,
@@ -14,6 +15,7 @@ import {
   Button,
   IconButton,
   Popover,
+  Typography,
   PopoverHandler,
   PopoverContent,
 } from "@/app/MTailwind";
@@ -53,50 +55,78 @@ export default function JasaGeofisika() {
       <h5 className="text-center uppercase mb-8">Stasiun Geofisika</h5>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {itemTerkini.map((product) => (
-          <Popover key={product.id}>
-            <PopoverHandler>
-              <Card className="border-2 hover:shadow-2xl transition relative py-6">
-                <div className="flex flex-col items-center my-6">
-                  <FaWind size={100} className="text-secondary" />
+          <Card
+            className="border-2 hover:shadow-2xl transition relative py-6"
+            key={product.id}
+          >
+            <Popover>
+              <PopoverHandler>
+                <div className="absolute top-4 right-4">
+                  <FaCircleInfo
+                    size={20}
+                    className="text-gray-500 cursor-pointer hover:text-secondary"
+                  />
                 </div>
-                <CardBody>
-                  <h2 className="text-lg font-semibold text-center">
-                    {product.Nama}
-                  </h2>
-                  <div className="flex flex-col justify-between items-center my-2 space-y-5">
-                    <p className="text-gray-500 mb-5">
-                      {" "}
-                      {new Intl.NumberFormat("id-ID", {
-                        style: "currency",
-                        currency: "IDR",
-                      }).format(product.Harga)}
-                    </p>
-                    <Button
-                      className={`button-effect ${
-                        memuatMasukKeKeranjang ? "opacity-50" : "opacity-100"
-                      }`}
-                      onClick={() => masukanKeKeranjang(product.id)}
-                      disabled={
-                        !apakahSudahLogin ||
-                        product.Status === "Tidak Tersedia" ||
-                        memuatMasukKeKeranjang
-                      }
-                    >
-                      <FaCartShopping size={15} />
-                      <span className="text-sm">
-                        {memuatMasukKeKeranjang ? (
-                          <Memuat />
-                        ) : (
-                          "Masukkan ke keranjang"
-                        )}
-                      </span>
-                    </Button>
-                  </div>
-                </CardBody>
-              </Card>
-            </PopoverHandler>
-            <PopoverContent>{product.Deskripsi}</PopoverContent>
-          </Popover>
+              </PopoverHandler>
+              <PopoverContent>
+                <Typography variant="small">
+                  Produk akan menjadi Rp 0 jika mengambil ajukan gratis.
+                </Typography>
+              </PopoverContent>
+            </Popover>
+            <Popover>
+              <PopoverHandler>
+                <div className="flex flex-col items-center my-6">
+                  <FaWind
+                    size={100}
+                    className="text-secondary cursor-pointer hover:text-secondary"
+                  />
+                </div>
+              </PopoverHandler>
+              <PopoverContent>
+                <Typography variant="small" className="text-lg font-semibold">
+                  Detail Produk
+                </Typography>
+                <Typography variant="small" className="text-gray-600">
+                  {product.Deskripsi}
+                </Typography>
+              </PopoverContent>
+            </Popover>
+            <CardBody>
+              <h2 className="text-lg font-semibold text-center">
+                {product.Nama}
+              </h2>
+              <div className="flex flex-col justify-between items-center my-2 space-y-5">
+                <p className="text-gray-500 mb-5">
+                  {" "}
+                  {new Intl.NumberFormat("id-ID", {
+                    style: "currency",
+                    currency: "IDR",
+                  }).format(product.Harga)}
+                </p>
+                <Button
+                  className={`button-effect ${
+                    memuatMasukKeKeranjang ? "opacity-50" : "opacity-100"
+                  }`}
+                  onClick={() => masukanKeKeranjang(product.id)}
+                  disabled={
+                    !apakahSudahLogin ||
+                    product.Status === "Tidak Tersedia" ||
+                    memuatMasukKeKeranjang
+                  }
+                >
+                  <FaCartShopping size={15} />
+                  <span className="text-sm">
+                    {memuatMasukKeKeranjang ? (
+                      <Memuat />
+                    ) : (
+                      "Masukkan ke keranjang"
+                    )}
+                  </span>
+                </Button>
+              </div>
+            </CardBody>
+          </Card>
         ))}
       </div>
       <div className="flex items-center justify-center gap-4 mt-10">

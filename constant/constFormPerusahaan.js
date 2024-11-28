@@ -17,7 +17,6 @@ const StepFormPerusahaan = ({ stepAktif, checkboxAktif, setCheckboxAktif }) => {
     Pekerjaan: "",
     Pendidikan_Terakhir: "",
     Jenis_Kelamin: "",
-    Email: "",
     No_Hp: "",
     NPWP_Perusahaan: "",
     Nama_Perusahaan: "",
@@ -184,22 +183,7 @@ const StepFormPerusahaan = ({ stepAktif, checkboxAktif, setCheckboxAktif }) => {
                   <option value="Wanita">Wanita</option>
                 </select>
               </div>
-              <div>
-                <p className="text-sm font-bold"> Email</p>
-                <Input
-                  name="Email"
-                  type="email"
-                  className="input-custom"
-                  placeholder="Email"
-                  value={formDataPerusahaan.Email}
-                  onChange={handleInputChange}
-                  size="lg"
-                  labelProps={{
-                    className: "hidden",
-                  }}
-                  required
-                />
-              </div>
+
               <div>
                 <p className="text-sm font-bold">No HP / No Telepon</p>
                 <Input

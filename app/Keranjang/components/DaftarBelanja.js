@@ -1,11 +1,12 @@
 "use client";
-import { Typography, Button } from "@/app/MTailwind";
 import "@/app/globals.css";
-import useNavbarAktif from "@/hooks/Frontend/useNavbarAktif";
-import useAmbilKeranjang from "@/hooks/Backend/useAmbilKeranjang";
+import { Typography, Button } from "@/app/MTailwind";
 import { FaTrash } from "react-icons/fa6";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import { toast } from "react-hot-toast";
+import useNavbarAktif from "@/hooks/Frontend/useNavbarAktif";
+import useAmbilKeranjang from "@/hooks/Backend/useAmbilKeranjang";
 
 const PemesananProduk = () => {
   const { navbarAktif, handlenavbarAktif } = useNavbarAktif();
@@ -17,7 +18,18 @@ const PemesananProduk = () => {
     "Total",
     "Action",
   ];
-  const { keranjang, memuat, hapusItemKeranjang } = useAmbilKeranjang();
+  const handleLanjutkanPemesanan = (path) => {
+    if (
+      !keranjang ||
+      (!keranjang.Informasi?.length && !keranjang.Jasa?.length)
+    ) {
+      toast.error("Keranjang Anda kosong. Tambahkan item terlebih dahulu.");
+      return;
+    }
+    handlenavbarAktif(path); // Lanjutkan navigasi
+  };
+  const { keranjang, memuat, ambilKeranjang, hapusItemKeranjang } =
+    useAmbilKeranjang();
   const cartContent = keranjang
     ? [...(keranjang.Informasi || []), ...(keranjang.Jasa || [])]
     : [];
@@ -140,7 +152,7 @@ const PemesananProduk = () => {
               <Button
                 className="button-effect"
                 type="button"
-                onClick={() => handlenavbarAktif("/Ajukan")}
+                onClick={() => handleLanjutkanPemesanan("/Ajukan")}
               >
                 <span>Lanjutkan Pemesanan</span>
               </Button>

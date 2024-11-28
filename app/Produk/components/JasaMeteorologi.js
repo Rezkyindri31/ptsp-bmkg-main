@@ -7,6 +7,7 @@ import {
   FaArrowLeftLong,
   FaArrowRightLong,
   FaCartShopping,
+  FaCircleInfo,
 } from "react-icons/fa6";
 import {
   Card,
@@ -14,6 +15,7 @@ import {
   Button,
   IconButton,
   Popover,
+  Typography,
   PopoverHandler,
   PopoverContent,
 } from "@/app/MTailwind";
@@ -56,9 +58,42 @@ export default function JasaMeteorologi() {
           <Popover key={product.id}>
             <PopoverHandler>
               <Card className="border-2 hover:shadow-2xl transition relative py-6">
-                <div className="flex flex-col items-center my-6">
-                  <FaMountain size={100} className="text-secondary" />
-                </div>
+                <Popover>
+                  <PopoverHandler>
+                    <div className="absolute top-4 right-4">
+                      <FaCircleInfo
+                        size={20}
+                        className="text-gray-500 cursor-pointer hover:text-secondary"
+                      />
+                    </div>
+                  </PopoverHandler>
+                  <PopoverContent>
+                    <Typography variant="small">
+                      Produk akan menjadi Rp 0 jika mengambil ajukan gratis.
+                    </Typography>
+                  </PopoverContent>
+                </Popover>
+                <Popover>
+                  <PopoverHandler>
+                    <div className="flex flex-col items-center my-6">
+                      <FaMountain
+                        size={100}
+                        className="text-secondary cursor-pointer hover:text-secondary"
+                      />
+                    </div>
+                  </PopoverHandler>
+                  <PopoverContent>
+                    <Typography
+                      variant="small"
+                      className="text-lg font-semibold"
+                    >
+                      Detail Produk
+                    </Typography>
+                    <Typography variant="small" className="text-gray-600">
+                      {product.Deskripsi}
+                    </Typography>
+                  </PopoverContent>
+                </Popover>
                 <CardBody>
                   <h2 className="text-lg font-semibold text-center">
                     {product.Nama}

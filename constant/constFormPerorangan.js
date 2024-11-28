@@ -19,7 +19,6 @@ const StepFormPerorangan = ({ stepAktif, checkboxAktif, setCheckboxAktif }) => {
     Nama_Lengkap: "",
     Pendidikan_Terakhir: "",
     Jenis_Kelamin: "",
-    Email: "",
     No_Hp: "",
     Tanggal_Pembuatan_Akun: serverTimestamp(),
   });
@@ -186,22 +185,7 @@ const StepFormPerorangan = ({ stepAktif, checkboxAktif, setCheckboxAktif }) => {
                   <option value="Wanita">Wanita</option>
                 </select>
               </div>
-              <div>
-                <p className="text-sm font-bold"> Email</p>
-                <Input
-                  name="Email"
-                  type="email"
-                  className="input-custom"
-                  placeholder="Email"
-                  value={formDataPerorangan.Email}
-                  onChange={handleInputChange}
-                  size="lg"
-                  labelProps={{
-                    className: "hidden",
-                  }}
-                  required
-                />
-              </div>
+
               <div>
                 <p className="text-sm font-bold">No HP / No Telepon</p>
                 <Input

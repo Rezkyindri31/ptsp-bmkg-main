@@ -21,7 +21,7 @@ import useAjukanFormSubmit from "@/hooks/Backend/useMasukanAjukan";
 function FormAjukan() {
   const [sectionAktif, setSectionAktif] = useState(1);
   const [keranjang, setKeranjang] = useState({ ID_Ajukan: [] });
-  const { handleFormSubmit, loading } = useAjukanFormSubmit(keranjang);
+  const { handleFormSubmit } = useAjukanFormSubmit(keranjang);
 
   const sectionComponents = {
     1: <PenanggulanganBencanaForm onSubmit={handleFormSubmit} />,

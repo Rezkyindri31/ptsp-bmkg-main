@@ -4,6 +4,7 @@ import { Input, Button } from "@material-tailwind/react";
 
 const PenanggulanganBencanaForm = ({ onSubmit }) => {
   const [files, setFiles] = useState({});
+  const [loading, setLoading] = useState(false);
 
   const handleFileChange = (e) => {
     const { name, files: selectedFiles } = e.target;
@@ -17,10 +18,20 @@ const PenanggulanganBencanaForm = ({ onSubmit }) => {
     e.preventDefault();
     const allFiles = Object.values(files).flat();
 
-    if (allFiles.length > 0) {
-      await onSubmit(allFiles, "Kegiatan Penanggulangan Bencana");
-    } else {
+    if (allFiles.length === 0) {
       toast.error("Silakan pilih file untuk diunggah.");
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      await onSubmit(allFiles, "Kegiatan Penanggulangan Bencana");
+      toast.success("File berhasil diunggah.");
+    } catch (error) {
+      toast.error("Terjadi kesalahan saat mengunggah file.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -46,8 +57,14 @@ const PenanggulanganBencanaForm = ({ onSubmit }) => {
         </div>
       </div>
       <div className="text-center">
-        <Button color="blue" className="w-full" ripple="light" type="submit">
-          Ajukan Sekarang
+        <Button
+          color="blue"
+          className="w-full"
+          ripple="light"
+          type="submit"
+          disabled={loading}
+        >
+          {loading ? "Sedang Diproses..." : "Ajukan Sekarang"}
         </Button>
       </div>
     </form>
