@@ -97,7 +97,6 @@ const useMasukanIKM = () => {
 
     const ikmData = {
       Opsi_Yang_Dipilih: selectedOptions,
-      ikmResponses: responses,
     };
 
     try {
@@ -105,9 +104,16 @@ const useMasukanIKM = () => {
       const docSnapshot = await getDoc(ikmRef);
 
       if (docSnapshot.exists()) {
-        await updateDoc(ikmRef, ikmData);
+        const existingData = docSnapshot.data();
+        const mergedData = {
+          ...existingData,
+          ikmResponses: responses,
+        };
+        await updateDoc(ikmRef, mergedData);
+        console.log("Merged IKM Data:", mergedData);
       } else {
         await setDoc(ikmRef, ikmData, { merge: true });
+        console.log("IKM Document Created with Selected Options.");
       }
 
       const pemesananRef = doc(firestore, "pemesanan", pemesananId);

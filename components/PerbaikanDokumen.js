@@ -11,7 +11,13 @@ import { FaTrash } from "react-icons/fa";
 import { toast, Toaster } from "react-hot-toast";
 import usePerbaikiDokumen from "@/hooks/Backend/usePerbaikanDokumen";
 
-const DialogPerbaikanDokumen = ({ open, onClose, ajukanID, namaAjukan }) => {
+const DialogPerbaikanDokumen = ({
+  open,
+  onClose,
+  ajukanID,
+  namaAjukan,
+  keterangan,
+}) => {
   const [files, setFiles] = useState([]);
   const [loading, setLoading] = useState(false);
   const { handlePerbaikiDokumen } = usePerbaikiDokumen();
@@ -113,9 +119,7 @@ const DialogPerbaikanDokumen = ({ open, onClose, ajukanID, namaAjukan }) => {
           >
             {renderInstructions()}
           </Typography>
-          <Typography variant="paragraph">
-            Deskripsi Kesalahannya : Disini
-          </Typography>
+          <Typography variant="paragraph">{keterangan}</Typography>
           <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 mb-4 flex flex-col items-center justify-center">
             <input
               type="file"

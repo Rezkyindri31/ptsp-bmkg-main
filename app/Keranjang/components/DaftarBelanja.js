@@ -26,7 +26,7 @@ const PemesananProduk = () => {
       toast.error("Keranjang Anda kosong. Tambahkan item terlebih dahulu.");
       return;
     }
-    handlenavbarAktif(path); // Lanjutkan navigasi
+    handlenavbarAktif(path);
   };
   const { keranjang, memuat, ambilKeranjang, hapusItemKeranjang } =
     useAmbilKeranjang();

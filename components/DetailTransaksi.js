@@ -246,7 +246,7 @@ const DetailTransaksi = ({ isOpen, onClose, pemesanan, userData }) => {
                   >
                     Status Pengisian IKM : {""}
                     {pemesanan.Status_Pengisian_IKM !== "Telah Diisi"
-                      ? "IKM Belum Disi"
+                      ? "IKM Belum Diisi"
                       : "IKM Sudah Diisi"}
                   </Typography>
                   <Typography
@@ -421,6 +421,7 @@ const DetailTransaksi = ({ isOpen, onClose, pemesanan, userData }) => {
         open={bukaPerbaikanDokumen}
         onClose={() => setBukaPerbaikanDokumen(false)}
         ajukanID={pemesanan.ID_Ajukan}
+        keterangan={pemesanan.ajukanDetail.Keterangan}
         namaAjukan={pemesanan.ajukanDetail.Nama_Ajukan}
       />
       <DialogInvoicePemesanan

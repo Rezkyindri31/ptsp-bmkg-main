@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { serverTimestamp } from "firebase/firestore";
-import { Input, Checkbox, Button } from "@material-tailwind/react";
+import { Input, Checkbox, Button, Spinner } from "@material-tailwind/react";
 import { addToPerusahaanCollection } from "@/hooks/Backend/useFormPerusahaan";
 import { formatNPWP } from "@/utils/utilsNPWP";
 import { formatNoIdentitas } from "@/utils/utilsNoIdentitas";
@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 
 const StepFormPerusahaan = ({ stepAktif, checkboxAktif, setCheckboxAktif }) => {
   const pengarah = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
   const [formDataPerusahaan, setFormDataPerusahaan] = useState({
     No_Identitas: "",
     Nama_Lengkap: "",
@@ -77,6 +78,7 @@ const StepFormPerusahaan = ({ stepAktif, checkboxAktif, setCheckboxAktif }) => {
   };
 
   const handleSubmit = async () => {
+    setIsLoading(true);
     if (!checkboxAktif) {
       toast.error("You must agree to the terms and conditions.");
       return;
@@ -98,6 +100,8 @@ const StepFormPerusahaan = ({ stepAktif, checkboxAktif, setCheckboxAktif }) => {
     } catch (error) {
       console.error("Error saving data: ", error);
       toast.error("Failed to save data. Please try again.");
+    } finally {
+      setIsLoading(false);
     }
   };
   switch (stepAktif) {
@@ -364,10 +368,19 @@ const StepFormPerusahaan = ({ stepAktif, checkboxAktif, setCheckboxAktif }) => {
             <div className="my-2">
               <Button
                 className="bg-secondary"
-                disabled={!checkboxAktif}
+                disabled={!checkboxAktif || isLoading}
                 onClick={handleSubmit}
               >
-                Simpan Data
+                {isLoading ? (
+                  <Spinner
+                    thickness="4px"
+                    speed="0.65s"
+                    color="white"
+                    size="sm"
+                  />
+                ) : (
+                  <span>Simpan Data</span>
+                )}
               </Button>
             </div>
           </div>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { serverTimestamp } from "firebase/firestore";
 import { useRouter } from "next/navigation";
-import { Input, Checkbox, Button } from "@/app/MTailwind";
+import { Input, Checkbox, Button, Spinner } from "@/app/MTailwind";
 import { addToPeroranganCollection } from "@/hooks/Backend/useFormPerorangan";
 import { formatNPWP } from "@/utils/utilsNPWP";
 import { formatNoIdentitas } from "@/utils/utilsNoIdentitas";
@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 
 const StepFormPerorangan = ({ stepAktif, checkboxAktif, setCheckboxAktif }) => {
   const pengarah = useRouter();
-
+  const [isLoading, setIsLoading] = useState(false);
   const [formDataPerorangan, setFormDataPerorangan] = useState({
     No_Identitas: "",
     Pekerjaan: "",
@@ -64,6 +64,7 @@ const StepFormPerorangan = ({ stepAktif, checkboxAktif, setCheckboxAktif }) => {
   };
 
   const handleSubmit = async () => {
+    setIsLoading(true);
     if (!checkboxAktif) {
       toast.error("You must agree to the terms and conditions.");
       return;
@@ -75,7 +76,6 @@ const StepFormPerorangan = ({ stepAktif, checkboxAktif, setCheckboxAktif }) => {
       toast.error("Harap isi seluruh form yang ada.");
       return;
     }
-
     try {
       await addToPeroranganCollection(formDataPerorangan);
       toast.success("Data Berhasil Disimpan!");
@@ -83,6 +83,8 @@ const StepFormPerorangan = ({ stepAktif, checkboxAktif, setCheckboxAktif }) => {
     } catch (error) {
       console.error("Error saving data: ", error);
       toast.error("Failed to save data. Please try again.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -214,10 +216,19 @@ const StepFormPerorangan = ({ stepAktif, checkboxAktif, setCheckboxAktif }) => {
             <div className="my-2">
               <Button
                 className="bg-secondary"
-                disabled={!checkboxAktif}
+                disabled={!checkboxAktif || isLoading}
                 onClick={handleSubmit}
               >
-                Simpan Data
+                {isLoading ? (
+                  <Spinner
+                    thickness="4px"
+                    speed="0.65s"
+                    color="white"
+                    size="sm"
+                  />
+                ) : (
+                  <span>Simpan Data</span>
+                )}
               </Button>
             </div>
           </div>

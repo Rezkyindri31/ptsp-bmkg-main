@@ -23,7 +23,6 @@ const useAmbilKeranjang = () => {
       if (keranjangSnap.exists()) {
         setKeranjang(keranjangSnap.data());
       } else {
-        toast.error("Keranjang Anda kosong.");
       }
     } catch (error) {
       console.error("Gagal mengambil keranjang:", error);

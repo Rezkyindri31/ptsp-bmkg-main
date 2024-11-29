@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { firestore } from "@/lib/firebaseConfig";
-import { doc, updateDoc, getDoc } from "firebase/firestore";
+import { doc, updateDoc, getDoc, deleteField } from "firebase/firestore";
 import {
   getStorage,
   ref,
@@ -54,6 +54,7 @@ const usePerbaikiDokumen = () => {
         File_Ajukan: newFileUrls,
         Status_Ajuan: "Sedang Ditinjau",
         Tanggal_Pembuatan_Ajukan: new Date(),
+        Keterangan: deleteField(),
       });
 
       toast.success(
