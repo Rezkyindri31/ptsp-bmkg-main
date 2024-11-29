@@ -2,10 +2,10 @@ import React from "react";
 import { Typography } from "@/app/MTailwind";
 import useVerifikasiLogin from "@/hooks/Backend/useVerifikasiLogin";
 import Skeleton from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css"; // Import skeleton styles
+import "react-loading-skeleton/dist/skeleton.css";
 
 function TampilanProfile() {
-  const { detailPengguna, loading } = useVerifikasiLogin(); // Assuming loading is part of the returned value
+  const { detailPengguna, loading } = useVerifikasiLogin();
 
   return (
     <div>
@@ -150,20 +150,6 @@ function TampilanProfile() {
           <div className="grid grid-cols-2 text-center gap-y-6">
             <div>
               <Typography variant="h6" className="mb-2">
-                NPWP
-              </Typography>
-              <Typography className="mb-2">{detailPengguna?.NPWP}</Typography>
-            </div>
-            <div>
-              <Typography variant="h6" className="mb-2">
-                Pekerjaan
-              </Typography>
-              <Typography className="mb-2">
-                {detailPengguna?.Pekerjaan}
-              </Typography>
-            </div>
-            <div>
-              <Typography variant="h6" className="mb-2">
                 Nomor Identitas
               </Typography>
               <Typography className="mb-2">
@@ -176,6 +162,14 @@ function TampilanProfile() {
               </Typography>
               <Typography className="mb-2">
                 {detailPengguna?.Nama_Lengkap}
+              </Typography>
+            </div>
+            <div>
+              <Typography variant="h6" className="mb-2">
+                Pekerjaan
+              </Typography>
+              <Typography className="mb-2">
+                {detailPengguna?.Pekerjaan}
               </Typography>
             </div>
             <div>

@@ -11,17 +11,14 @@ import { formatNoTelepon } from "@/utils/utilsNoTelepon";
 
 function EditProfile() {
   const { detailPengguna } = useVerifikasiLogin();
-  const { detailPengguna: editedDetailPengguna, tanganiGantiPengguna, tanganiSimpan } = useEditProfile(detailPengguna);
+  const {
+    detailPengguna: editedDetailPengguna,
+    tanganiGantiPengguna,
+    tanganiSimpan,
+  } = useEditProfile(detailPengguna);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-
-    if (name === "NPWP") {
-      const formattedInputNPWP = formatNPWP(value);
-      tanganiGantiPengguna({ target: { name, value: formattedInputNPWP } });
-      return;
-    }
-
     if (name === "No_Identitas") {
       const formattedInputNoIdentitas = formatNoIdentitas(value);
       tanganiGantiPengguna({
@@ -58,37 +55,67 @@ function EditProfile() {
               <Typography variant="h6" className="mb-2">
                 NPWP
               </Typography>
-              <Input name="NPWP" className="input-custom" value={editedDetailPengguna.NPWP || ""} onChange={handleInputChange} />
+              <Input
+                name="NPWP"
+                className="input-custom"
+                value={editedDetailPengguna.NPWP || ""}
+                onChange={handleInputChange}
+              />
             </div>
             <div>
               <Typography variant="h6" className="mb-2">
                 Nomor Identitas
               </Typography>
-              <Input name="No_Identitas" value={editedDetailPengguna.No_Identitas || ""} onChange={handleInputChange} className="input-custom" />
+              <Input
+                name="No_Identitas"
+                value={editedDetailPengguna.No_Identitas || ""}
+                onChange={handleInputChange}
+                className="input-custom"
+              />
             </div>
             <div>
               <Typography variant="h6" className="mb-2">
                 Pekerjaan
               </Typography>
-              <Input name="Pekerjaan" value={editedDetailPengguna.Pekerjaan || ""} onChange={handleInputChange} className="input-custom" />
+              <Input
+                name="Pekerjaan"
+                value={editedDetailPengguna.Pekerjaan || ""}
+                onChange={handleInputChange}
+                className="input-custom"
+              />
             </div>
             <div>
               <Typography variant="h6" className="mb-2">
                 Nama Lengkap
               </Typography>
-              <Input name="Nama_Lengkap" value={editedDetailPengguna.Nama_Lengkap || ""} onChange={handleInputChange} className="input-custom" />
+              <Input
+                name="Nama_Lengkap"
+                value={editedDetailPengguna.Nama_Lengkap || ""}
+                onChange={handleInputChange}
+                className="input-custom"
+              />
             </div>
             <div>
               <Typography variant="h6" className="mb-2">
                 Pendidikan Terakhir
               </Typography>
-              <Input name="Pendidikan_Terakhir" value={editedDetailPengguna.Pendidikan_Terakhir || ""} onChange={handleInputChange} className="input-custom" />
+              <Input
+                name="Pendidikan_Terakhir"
+                value={editedDetailPengguna.Pendidikan_Terakhir || ""}
+                onChange={handleInputChange}
+                className="input-custom"
+              />
             </div>
             <div>
               <Typography variant="h6" className="mb-2">
                 Jenis Kelamin
               </Typography>
-              <select name="Jenis_Kelamin" value={editedDetailPengguna.Jenis_Kelamin || ""} onChange={handleInputChange} className="block w-full mt-1 p-2 border rounded-lg text-gray-500 input-custom">
+              <select
+                name="Jenis_Kelamin"
+                value={editedDetailPengguna.Jenis_Kelamin || ""}
+                onChange={handleInputChange}
+                className="block w-full mt-1 p-2 border rounded-lg text-gray-500 input-custom"
+              >
                 <option value="" disabled>
                   Pilih Jenis Kelamin
                 </option>
@@ -101,13 +128,23 @@ function EditProfile() {
               <Typography variant="h6" className="mb-2">
                 Email
               </Typography>
-              <Input name="Email" value={editedDetailPengguna.Email || ""} onChange={handleInputChange} className="input-custom" />
+              <Input
+                name="Email"
+                value={editedDetailPengguna.Email || ""}
+                onChange={handleInputChange}
+                className="input-custom"
+              />
             </div>
             <div>
               <Typography variant="h6" className="mb-2">
                 No HP / No Telepon
               </Typography>
-              <Input name="No_Hp" value={editedDetailPengguna.No_Hp || ""} onChange={handleInputChange} className="input-custom" />
+              <Input
+                name="No_Hp"
+                value={editedDetailPengguna.No_Hp || ""}
+                onChange={handleInputChange}
+                className="input-custom"
+              />
             </div>
             <div className="col-span-2 flex justify-end">
               <Button color="green" onClick={tanganiSimpan} className="mt-4">

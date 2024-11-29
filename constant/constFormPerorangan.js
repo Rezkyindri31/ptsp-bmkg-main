@@ -13,7 +13,6 @@ const StepFormPerorangan = ({ stepAktif, checkboxAktif, setCheckboxAktif }) => {
   const pengarah = useRouter();
 
   const [formDataPerorangan, setFormDataPerorangan] = useState({
-    NPWP: "",
     No_Identitas: "",
     Pekerjaan: "",
     Nama_Lengkap: "",
@@ -31,6 +30,7 @@ const StepFormPerorangan = ({ stepAktif, checkboxAktif, setCheckboxAktif }) => {
         ...prev,
         [name]: formattedInputNPWP,
       }));
+
       return;
     }
     if (name === "No_Identitas") {
@@ -96,21 +96,6 @@ const StepFormPerorangan = ({ stepAktif, checkboxAktif, setCheckboxAktif }) => {
             </h2>
             <div className="grid grid-cols-2 gap-4 ">
               <div>
-                <p className="text-sm font-bold">NPWP</p>
-                <Input
-                  name="NPWP"
-                  className="input-custom"
-                  placeholder="NPWP"
-                  value={formDataPerorangan.NPWP}
-                  onChange={handleInputChange}
-                  size="lg"
-                  labelProps={{
-                    className: "hidden",
-                  }}
-                  required
-                />
-              </div>
-              <div>
                 <p className="text-sm font-bold"> No Identitas</p>
                 <Input
                   name="No_Identitas"
@@ -126,12 +111,12 @@ const StepFormPerorangan = ({ stepAktif, checkboxAktif, setCheckboxAktif }) => {
                 />
               </div>
               <div>
-                <p className="text-sm font-bold">Pekerjaan</p>
+                <p className="text-sm font-bold">Nama Lengkap</p>
                 <Input
-                  name="Pekerjaan"
+                  name="Nama_Lengkap"
                   className="input-custom"
-                  placeholder="Pekerjaan"
-                  value={formDataPerorangan.Pekerjaan}
+                  placeholder="Nama Lengkap"
+                  value={formDataPerorangan.Nama_Lengkap}
                   onChange={handleInputChange}
                   size="lg"
                   labelProps={{
@@ -141,12 +126,12 @@ const StepFormPerorangan = ({ stepAktif, checkboxAktif, setCheckboxAktif }) => {
                 />
               </div>
               <div>
-                <p className="text-sm font-bold">Nama Lengkap</p>
+                <p className="text-sm font-bold">Pekerjaan</p>
                 <Input
-                  name="Nama_Lengkap"
+                  name="Pekerjaan"
                   className="input-custom"
-                  placeholder="Nama Lengkap"
-                  value={formDataPerorangan.Nama_Lengkap}
+                  placeholder="Pekerjaan"
+                  value={formDataPerorangan.Pekerjaan}
                   onChange={handleInputChange}
                   size="lg"
                   labelProps={{
