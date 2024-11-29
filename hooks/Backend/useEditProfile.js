@@ -26,9 +26,7 @@ function useEditProfile(inisialisasiDataProfil = {}) {
       return;
     }
     const fieldsPerorangan = [
-      "Email",
       "Jenis_Kelamin",
-      "NPWP",
       "Nama_Lengkap",
       "No_Hp",
       "No_Identitas",
@@ -37,7 +35,6 @@ function useEditProfile(inisialisasiDataProfil = {}) {
     ];
     const fieldsPerusahaan = [
       "Alamat_Perusahaan",
-      "Email",
       "Email_Perusahaan",
       "Jenis_Kelamin",
       "Nama_Perusahaan",

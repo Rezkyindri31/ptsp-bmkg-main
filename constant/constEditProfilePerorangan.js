@@ -53,17 +53,6 @@ function EditProfile() {
           <div className="grid grid-cols-2 text-center gap-x-3 gap-y-3">
             <div>
               <Typography variant="h6" className="mb-2">
-                NPWP
-              </Typography>
-              <Input
-                name="NPWP"
-                className="input-custom"
-                value={editedDetailPengguna.NPWP || ""}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div>
-              <Typography variant="h6" className="mb-2">
                 Nomor Identitas
               </Typography>
               <Input
@@ -122,18 +111,6 @@ function EditProfile() {
                 <option value="Pria">Pria</option>
                 <option value="Wanita">Wanita</option>
               </select>
-            </div>
-
-            <div>
-              <Typography variant="h6" className="mb-2">
-                Email
-              </Typography>
-              <Input
-                name="Email"
-                value={editedDetailPengguna.Email || ""}
-                onChange={handleInputChange}
-                className="input-custom"
-              />
             </div>
             <div>
               <Typography variant="h6" className="mb-2">

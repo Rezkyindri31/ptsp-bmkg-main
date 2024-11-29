@@ -24,15 +24,6 @@ const StepFormPerorangan = ({ stepAktif, checkboxAktif, setCheckboxAktif }) => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    if (name === "NPWP") {
-      const formattedInputNPWP = formatNPWP(value);
-      setFormDataPerorangan((prev) => ({
-        ...prev,
-        [name]: formattedInputNPWP,
-      }));
-
-      return;
-    }
     if (name === "No_Identitas") {
       const formattedInputNoIdentitas = formatNoIdentitas(value);
       setFormDataPerorangan((prev) => ({
