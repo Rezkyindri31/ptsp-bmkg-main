@@ -4,7 +4,6 @@ import { Typography, Input, Button } from "@/app/MTailwind";
 import useVerifikasiLogin from "@/hooks/Backend/useVerifikasiLogin";
 import useEditProfile from "@/hooks/Backend/useEditProfile";
 import { toast } from "react-toastify";
-import { formatNPWP } from "@/utils/utilsNPWP";
 import { formatNoIdentitas } from "@/utils/utilsNoIdentitas";
 import { formatHuruf } from "@/utils/utilsHuruf";
 import { formatNoTelepon } from "@/utils/utilsNoTelepon";
@@ -15,6 +14,7 @@ function EditProfile() {
     detailPengguna: editedDetailPengguna,
     tanganiGantiPengguna,
     tanganiSimpan,
+    loading,
   } = useEditProfile(detailPengguna);
 
   const handleInputChange = (e) => {
@@ -124,8 +124,13 @@ function EditProfile() {
               />
             </div>
             <div className="col-span-2 flex justify-end">
-              <Button color="green" onClick={tanganiSimpan} className="mt-4">
-                Simpan
+              <Button
+                color="green"
+                onClick={tanganiSimpan}
+                disabled={loading}
+                className="mt-4"
+              >
+                {loading ? "Menyimpan..." : "Simpan"}
               </Button>
             </div>
           </div>

@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 
 function useEditProfile(inisialisasiDataProfil = {}) {
   const [detailPengguna, setDetailPengguna] = useState(inisialisasiDataProfil);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     setDetailPengguna(inisialisasiDataProfil);
@@ -25,6 +26,7 @@ function useEditProfile(inisialisasiDataProfil = {}) {
       toast.error("Gagal menyimpan data.");
       return;
     }
+    setLoading(true);
     const fieldsPerorangan = [
       "Jenis_Kelamin",
       "Nama_Lengkap",
@@ -67,6 +69,8 @@ function useEditProfile(inisialisasiDataProfil = {}) {
       window.location.reload();
     } catch (error) {
       toast.error("Gagal menyimpan data.");
+    } finally {
+      setLoading(false);
     }
   }, [detailPengguna]);
 
@@ -75,6 +79,7 @@ function useEditProfile(inisialisasiDataProfil = {}) {
     setDetailPengguna,
     tanganiGantiPengguna,
     tanganiSimpan,
+    loading,
   };
 }
 

@@ -15,6 +15,7 @@ function EditProfile() {
     detailPengguna: editedDetailPengguna,
     tanganiGantiPengguna,
     tanganiSimpan,
+    loading,
   } = useEditProfile(detailPengguna);
 
   const handleInputChange = (e) => {
@@ -216,8 +217,13 @@ function EditProfile() {
               />
             </div>
             <div className="col-span-2 flex justify-end">
-              <Button color="green" onClick={tanganiSimpan} className="mt-4">
-                Simpan
+              <Button
+                color="green"
+                onClick={tanganiSimpan}
+                disabled={loading}
+                className="mt-4"
+              >
+                {loading ? "Menyimpan..." : "Simpan"}
               </Button>
             </div>
           </div>
