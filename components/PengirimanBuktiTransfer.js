@@ -15,6 +15,7 @@ const DialogPengirimanBuktiTransfer = ({
   open,
   onClose,
   ID_Pemesanan,
+  pemesanan,
   ID_Transaksi,
 }) => {
   const [files, setFiles] = useState([]);
@@ -102,7 +103,11 @@ const DialogPengirimanBuktiTransfer = ({
       <DialogHeader>Pengiriman Dokumen Transaksi {ID_Pemesanan}</DialogHeader>
       <DialogBody>
         <div className="w-full p-6 bg-white rounded-lg shadow-md">
-          <Typography variant="paragraph">Deskripsi Kesalahan : </Typography>
+          {pemesanan.Status_Pembayaran === "Ditolak" && (
+            <Typography color="gray" className="font-normal text-gray-600">
+              Keterangan Ditolak : {pemesanan.transaksiDetail.Keterangan}
+            </Typography>
+          )}
           <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 mb-4 flex flex-col items-center justify-center">
             <input
               type="file"

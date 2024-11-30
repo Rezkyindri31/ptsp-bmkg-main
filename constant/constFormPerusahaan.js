@@ -7,7 +7,7 @@ import { formatNPWP } from "@/utils/utilsNPWP";
 import { formatNoIdentitas } from "@/utils/utilsNoIdentitas";
 import { formatHuruf } from "@/utils/utilsHuruf";
 import { formatNoTelepon } from "@/utils/utilsNoTelepon";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 
 const StepFormPerusahaan = ({ stepAktif, checkboxAktif, setCheckboxAktif }) => {
   const pengarah = useRouter();
@@ -78,25 +78,26 @@ const StepFormPerusahaan = ({ stepAktif, checkboxAktif, setCheckboxAktif }) => {
   };
 
   const handleSubmit = async () => {
-    setIsLoading(true);
     if (!checkboxAktif) {
       toast.error("You must agree to the terms and conditions.");
       return;
     }
+
     const isFormValid = Object.values(formDataPerusahaan).every(
       (field) => field !== ""
     );
+
     if (!isFormValid) {
       toast.error("Harap isi seluruh form yang ada.");
       return;
     }
 
+    setIsLoading(true);
+
     try {
       await addToPerusahaanCollection(formDataPerusahaan);
       toast.success("Data Berhasil Disimpan!");
-      setTimeout(() => {
-        pengarah.push("/Beranda");
-      }, 3000);
+      pengarah.push("/Beranda");
     } catch (error) {
       console.error("Error saving data: ", error);
       toast.error("Failed to save data. Please try again.");
@@ -104,6 +105,7 @@ const StepFormPerusahaan = ({ stepAktif, checkboxAktif, setCheckboxAktif }) => {
       setIsLoading(false);
     }
   };
+
   switch (stepAktif) {
     case 0:
       return (

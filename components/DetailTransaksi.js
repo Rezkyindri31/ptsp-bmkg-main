@@ -46,7 +46,7 @@ const DetailTransaksi = ({ isOpen, onClose, pemesanan, userData }) => {
       size="xl"
     >
       <DialogHeader>Tracking Pesanan Anda</DialogHeader>
-      <DialogBody className="overflow-y-auto h-full w-full py-5 absolute">
+      <DialogBody className="overflow-y-scroll h-full w-full py-5 absolute">
         <div className="grid grid-cols-1 lg:grid-cols-[3.5fr_6.5fr] w-full ">
           <Toaster position="top-right" reverseOrder={false} />
           <div>
@@ -83,6 +83,14 @@ const DetailTransaksi = ({ isOpen, onClose, pemesanan, userData }) => {
                   >
                     Status Pengajuan : {pemesanan.ajukanDetail.Status_Ajuan}
                   </Typography>
+                  {pemesanan.ajukanDetail.Status_Ajuan === "Ditolak" && (
+                    <Typography
+                      color="gray"
+                      className="font-normal text-gray-600"
+                    >
+                      Keterangan Ditolak: {pemesanan.ajukanDetail.Keterangan}
+                    </Typography>
+                  )}
                   <Typography
                     color="gray"
                     className="font-normal text-gray-600"
@@ -153,6 +161,14 @@ const DetailTransaksi = ({ isOpen, onClose, pemesanan, userData }) => {
                       {pemesanan.ajukanDetail.Status_Ajuan === "Diterima"
                         ? `Tanggal Pembayaran : Gratis`
                         : "Tanggal Pembayaran : ..."}
+                    </Typography>
+                  )}
+                  {pemesanan.Status_Pembayaran === "Ditolak" && (
+                    <Typography
+                      color="gray"
+                      className="font-normal text-gray-600"
+                    >
+                      Keterangan Ditolak: {pemesanan.transaksiDetail.Keterangan}
                     </Typography>
                   )}
                   {pemesanan.ajukanDetail.Jenis_Ajukan === "Berbayar" && (
@@ -332,6 +348,8 @@ const DetailTransaksi = ({ isOpen, onClose, pemesanan, userData }) => {
                       {new Intl.NumberFormat("id-ID", {
                         style: "currency",
                         currency: "IDR",
+                        minimumFractionDigits: 0,
+                        maximumFractionDigits: 0,
                       }).format(pemesanan.Total_Harga_Pesanan)}
                     </>
                   ) : (
@@ -389,6 +407,8 @@ const DetailTransaksi = ({ isOpen, onClose, pemesanan, userData }) => {
                         {new Intl.NumberFormat("id-ID", {
                           style: "currency",
                           currency: "IDR",
+                          minimumFractionDigits: 0,
+                          maximumFractionDigits: 0,
                         }).format(produk.Harga)}
                       </Typography>
                     </div>
@@ -404,6 +424,8 @@ const DetailTransaksi = ({ isOpen, onClose, pemesanan, userData }) => {
                           {new Intl.NumberFormat("id-ID", {
                             style: "currency",
                             currency: "IDR",
+                            minimumFractionDigits: 0,
+                            maximumFractionDigits: 0,
                           }).format(produk.Total_Harga)}
                         </Typography>
                       </div>
@@ -445,6 +467,7 @@ const DetailTransaksi = ({ isOpen, onClose, pemesanan, userData }) => {
       <DialogPengirimanBuktiTransfer
         open={bukaPengisianBuktiTransaksi}
         onClose={() => setBukaPengisianBuktiTransaksi(false)}
+        pemesanan={pemesanan}
         ID_Pemesanan={pemesanan.id}
         ID_Transaksi={pemesanan.ID_Transaksi}
       />

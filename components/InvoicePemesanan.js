@@ -10,7 +10,13 @@ import {
 } from "@/app/MTailwind";
 import { toast, Toaster } from "react-hot-toast";
 
-const InvoicePesanan = ({ open, onClose, pemesanan, userData }) => {
+const InvoicePesanan = ({
+  open,
+  onClose,
+  pemesanan,
+  userData,
+  ajukanDetail,
+}) => {
   if (!pemesanan) return null;
   return (
     <Dialog
@@ -20,7 +26,7 @@ const InvoicePesanan = ({ open, onClose, pemesanan, userData }) => {
       size="xl"
     >
       <DialogHeader>Dokumen Pesanan Anda</DialogHeader>
-      <DialogBody className="overflow-y-auto h-full w-full py-5 absolute">
+      <DialogBody className="overflow-y-scroll h-full w-full py-5 absolute">
         <div className="bg-gray-100 min-h-screen p-2">
           <div className="mx-auto bg-white rounded-lg shadow-lg border-2 border-gray p-6">
             <div className="flex justify-between items-center pb-4 border-b">
@@ -122,7 +128,9 @@ const InvoicePesanan = ({ open, onClose, pemesanan, userData }) => {
                     Tanggal Pengajuan
                   </Typography>
                   <Typography variant="paragraph" className="text-gray-800">
-                    30 January 2023
+                    {new Date(
+                      ajukanDetail.Tanggal_Pembuatan_Ajukan.seconds * 1000
+                    ).toLocaleString()}
                   </Typography>
                 </div>
               </div>
@@ -152,12 +160,16 @@ const InvoicePesanan = ({ open, onClose, pemesanan, userData }) => {
                         {new Intl.NumberFormat("id-ID", {
                           style: "currency",
                           currency: "IDR",
+                          minimumFractionDigits: 0,
+                          maximumFractionDigits: 0,
                         }).format(produk.Harga)}
                       </td>
                       <td className="py-3 px-5 text-center">
                         {new Intl.NumberFormat("id-ID", {
                           style: "currency",
                           currency: "IDR",
+                          minimumFractionDigits: 0,
+                          maximumFractionDigits: 0,
                         }).format(produk.Harga * produk.Kuantitas)}
                       </td>
                     </tr>
@@ -178,6 +190,8 @@ const InvoicePesanan = ({ open, onClose, pemesanan, userData }) => {
                       {new Intl.NumberFormat("id-ID", {
                         style: "currency",
                         currency: "IDR",
+                        minimumFractionDigits: 0,
+                        maximumFractionDigits: 0,
                       }).format(pemesanan.Total_Harga_Pesanan)}
                     </>
                   </span>

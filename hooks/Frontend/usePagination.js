@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const usePagination = (itemList, itemsPerPage = 9) => {
+const usePagination = (itemList, itemsPerPage = 6) => {
   const [activePage, setActivePage] = useState(1);
   const totalHalaman = Math.ceil(itemList.length / itemsPerPage);
 

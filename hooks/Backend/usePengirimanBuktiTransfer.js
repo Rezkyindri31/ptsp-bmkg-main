@@ -6,7 +6,13 @@ import {
   getDownloadURL,
   deleteObject,
 } from "firebase/storage";
-import { doc, setDoc, updateDoc, getDoc } from "firebase/firestore";
+import {
+  doc,
+  setDoc,
+  updateDoc,
+  getDoc,
+  deleteField,
+} from "firebase/firestore";
 import { toast } from "react-hot-toast";
 
 const useBuatTransaksi = () => {
@@ -30,7 +36,6 @@ const useBuatTransaksi = () => {
       const transaksiRef = doc(firestore, "transaksi", ID_Transaksi);
       const transaksiDoc = await getDoc(transaksiRef);
 
-      // Hapus file lama jika ada
       if (transaksiDoc.exists() && transaksiDoc.data().Bukti_Pembayaran) {
         const fileUrls = transaksiDoc.data().Bukti_Pembayaran;
 
@@ -47,7 +52,6 @@ const useBuatTransaksi = () => {
         await Promise.all(deletePromises);
       }
 
-      // Upload file baru
       const uploadPromises = files.map((file) => {
         const fileRef = ref(storage, `bukti-transfer/${file.name}`);
         const uploadTask = uploadBytesResumable(fileRef, file);
@@ -66,15 +70,12 @@ const useBuatTransaksi = () => {
       });
 
       const fileUrls = await Promise.all(uploadPromises);
-
-      // Simpan data transaksi baru ke Firestore
       const newTransaksiDoc = {
         Bukti_Pembayaran: fileUrls,
         Tanggal_Pengiriman_Bukti: new Date(),
       };
       await setDoc(transaksiRef, newTransaksiDoc, { merge: true });
 
-      // Perbarui dokumen pemesanan
       const pemesananRef = doc(firestore, "pemesanan", ID_Pemesanan);
       const pemesananDoc = await getDoc(pemesananRef);
 
@@ -87,6 +88,12 @@ const useBuatTransaksi = () => {
         Status_Pembayaran: "Sedang Ditinjau",
       });
 
+      if (transaksiDoc.exists() && transaksiDoc.data().Keterangan) {
+        await updateDoc(transaksiRef, {
+          Keterangan: deleteField(),
+        });
+        console.log("Field Keterangan berhasil dihapus");
+      }
       toast.success("Bukti Transaksi berhasil dikirim!");
     } catch (err) {
       setError(err.message);

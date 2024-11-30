@@ -7,7 +7,7 @@ import { formatNPWP } from "@/utils/utilsNPWP";
 import { formatNoIdentitas } from "@/utils/utilsNoIdentitas";
 import { formatHuruf } from "@/utils/utilsHuruf";
 import { formatNoTelepon } from "@/utils/utilsNoTelepon";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 
 const StepFormPerorangan = ({ stepAktif, checkboxAktif, setCheckboxAktif }) => {
   const pengarah = useRouter();
@@ -55,18 +55,22 @@ const StepFormPerorangan = ({ stepAktif, checkboxAktif, setCheckboxAktif }) => {
   };
 
   const handleSubmit = async () => {
-    setIsLoading(true);
     if (!checkboxAktif) {
       toast.error("You must agree to the terms and conditions.");
       return;
     }
+
     const isFormValid = Object.values(formDataPerorangan).every(
       (field) => field !== ""
     );
+
     if (!isFormValid) {
       toast.error("Harap isi seluruh form yang ada.");
       return;
     }
+
+    setIsLoading(true);
+
     try {
       await addToPeroranganCollection(formDataPerorangan);
       toast.success("Data Berhasil Disimpan!");

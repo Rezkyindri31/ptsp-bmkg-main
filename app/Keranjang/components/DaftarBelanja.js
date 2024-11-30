@@ -89,6 +89,8 @@ const PemesananProduk = () => {
                         {new Intl.NumberFormat("id-ID", {
                           style: "currency",
                           currency: "IDR",
+                          minimumFractionDigits: 0,
+                          maximumFractionDigits: 0,
                         }).format(Harga)}
                       </td>
                       <td className="p-4">{Kuantitas}</td>
@@ -96,6 +98,8 @@ const PemesananProduk = () => {
                         {new Intl.NumberFormat("id-ID", {
                           style: "currency",
                           currency: "IDR",
+                          minimumFractionDigits: 0,
+                          maximumFractionDigits: 0,
                         }).format(Total_Harga)}
                       </td>
                       <td className="p-4">
@@ -141,6 +145,8 @@ const PemesananProduk = () => {
                         new Intl.NumberFormat("id-ID", {
                           style: "currency",
                           currency: "IDR",
+                          minimumFractionDigits: 0,
+                          maximumFractionDigits: 0,
                         }).format(totalHargaKeseluruhan)
                       )}
                     </Typography>
