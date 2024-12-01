@@ -90,7 +90,6 @@ const FormIKMKedua = ({ pemesanan }) => {
       return;
     }
     handleIKMSubmit(pemesanan.id);
-    window.location.reload();
   };
   return (
     <>

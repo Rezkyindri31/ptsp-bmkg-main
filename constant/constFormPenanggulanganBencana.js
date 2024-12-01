@@ -22,7 +22,6 @@ const PenanggulanganBencanaForm = ({ onSubmit }) => {
       toast.error("Silakan pilih file untuk diunggah.");
       return;
     }
-
     setLoading(true);
 
     try {

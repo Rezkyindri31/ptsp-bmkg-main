@@ -19,7 +19,7 @@ import useHitungKeranjangSesuaiID from "@/hooks/Backend/useHitungKeranjangSesuai
 import useNavbarAktif from "@/hooks/Frontend/useNavbarAktif";
 import useNavbarEfek from "@/hooks/Frontend/useNavbarEfek";
 import useVerifikasiLogin from "@/hooks/Backend/useVerifikasiLogin";
-import { useDialogPanduan } from "@/hooks/Frontend/useDialogPanduan";
+import useDialogPanduan from "@/hooks/Frontend/useDialogPanduan";
 import { useDialogRegulasi } from "@/hooks/Frontend/useDialogRegulasi";
 
 function Navigation() {

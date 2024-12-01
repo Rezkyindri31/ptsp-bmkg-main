@@ -6,7 +6,9 @@ import {
   DialogBody,
   IconButton,
   Typography,
+  Alert,
 } from "@/app/MTailwind";
+import { IoWarningOutline } from "react-icons/io5";
 import { toast, Toaster } from "react-hot-toast";
 import { FaTrash } from "react-icons/fa";
 import usePengirimanBuktiTransfer from "@/hooks/Backend/usePengirimanBuktiTransfer";
@@ -104,9 +106,25 @@ const DialogPengirimanBuktiTransfer = ({
       <DialogBody>
         <div className="w-full p-6 bg-white rounded-lg shadow-md">
           {pemesanan.Status_Pembayaran === "Ditolak" && (
-            <Typography color="gray" className="font-normal text-gray-600">
-              Keterangan Ditolak : {pemesanan.transaksiDetail.Keterangan}
-            </Typography>
+            <Alert className="bg-red-200 border-2 border-red-800 mb-4 p-4">
+              <div className="flex items-center mb-2">
+                <IoWarningOutline className="text-red-800 mr-2 w-5 h-5" />
+                <Typography
+                  variant="paragraph"
+                  className="text-red-800 uppercase font-bold"
+                >
+                  Perbaikan pada Dokumen
+                </Typography>
+              </div>
+              <hr className="border-[1px] text-red-800 mb-2"></hr>
+              <Typography
+                variant="paragraph"
+                color="black"
+                className="font-semibold"
+              >
+                {pemesanan.transaksiDetail.Keterangan}
+              </Typography>
+            </Alert>
           )}
           <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 mb-4 flex flex-col items-center justify-center">
             <input

@@ -271,7 +271,7 @@ const DetailTransaksi = ({ isOpen, onClose, pemesanan, userData }) => {
                   >
                     Status Pesanan : {""}
                     {pemesanan.Status_Pesanan === "Belum Selesai"
-                      ? "Pesanan belum selesai"
+                      ? "Pesanan Belum Selesai"
                       : "Pesanan selesai"}
                   </Typography>
                   <Button
@@ -342,19 +342,13 @@ const DetailTransaksi = ({ isOpen, onClose, pemesanan, userData }) => {
               <div className="bg-gradient-to-br from-secondary to-primary text-white p-4 rounded-lg shadow-xl border-2">
                 <h2 className="font-semibold mb-4">Ringkasan Pesanan</h2>
                 <Typography>
-                  {pemesanan.ajukanDetail.Jenis_Ajukan === "Berbayar" ? (
-                    <>
-                      Total Pesanan :{" "}
-                      {new Intl.NumberFormat("id-ID", {
-                        style: "currency",
-                        currency: "IDR",
-                        minimumFractionDigits: 0,
-                        maximumFractionDigits: 0,
-                      }).format(pemesanan.Total_Harga_Pesanan)}
-                    </>
-                  ) : (
-                    <>Total Pesanan : {pemesanan.Total_Harga_Pesanan}</>
-                  )}
+                  Total Pesanan :{" "}
+                  {new Intl.NumberFormat("id-ID", {
+                    style: "currency",
+                    currency: "IDR",
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 0,
+                  }).format(pemesanan.Total_Harga_Pesanan)}
                 </Typography>
               </div>
             </div>

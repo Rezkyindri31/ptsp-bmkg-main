@@ -5,6 +5,7 @@ import { firestore } from "@/lib/firebaseConfig";
 import { collection, doc, setDoc, updateDoc, getDoc } from "firebase/firestore";
 import { toast } from "react-hot-toast";
 import useStepperFormIKM from "@/hooks/Frontend/useStepperFormIKM";
+import { Router } from "next/router";
 const useMasukanIKM = () => {
   const { serviceItems } = useStepperFormIKM();
   const pengarah = useRouter();
@@ -59,12 +60,16 @@ const useMasukanIKM = () => {
               onChange={() =>
                 handleSelectionChange("KualitasLayanan", id, label)
               }
+              checked={
+                responses.find((item) => item.id === id)?.KualitasLayanan ===
+                label
+              }
             />
           )
         )}
       </div>
     ),
-    [responses]
+    [responses, handleSelectionChange]
   );
 
   const renderHarapanKonsumenGroup = useCallback(
@@ -80,12 +85,16 @@ const useMasukanIKM = () => {
               onChange={() =>
                 handleSelectionChange("HarapanKonsumen", id, label)
               }
+              checked={
+                responses.find((item) => item.id === id)?.HarapanKonsumen ===
+                label
+              }
             />
           )
         )}
       </div>
     ),
-    [responses]
+    [responses, handleSelectionChange]
   );
 
   const handleIKMSubmit = async (pemesananId) => {
@@ -111,6 +120,7 @@ const useMasukanIKM = () => {
         };
         await updateDoc(ikmRef, mergedData);
         console.log("Merged IKM Data:", mergedData);
+        window.location.reload();
       } else {
         await setDoc(ikmRef, ikmData, { merge: true });
         console.log("IKM Document Created with Selected Options.");
@@ -127,7 +137,6 @@ const useMasukanIKM = () => {
       } else {
         console.warn("Pemesanan dengan ID", pemesananId, "tidak ditemukan.");
       }
-
       toast.success("IKM berhasil dikirim!");
     } catch (err) {
       console.error("Gagal mengirim IKM:", err);
