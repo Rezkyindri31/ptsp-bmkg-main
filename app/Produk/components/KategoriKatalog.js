@@ -34,7 +34,7 @@ function Katalog() {
       }
     }
     .animate-marquee {
-      animation: marquee 7s linear infinite;
+      animation: marquee 25s linear infinite;
     }
   `;
 

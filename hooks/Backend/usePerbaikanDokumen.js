@@ -78,6 +78,7 @@ const usePerbaikiDokumen = () => {
       toast.success(
         "Dokumen berhasil diperbarui dan sedang ditinjau oleh admin."
       );
+      window.location.reload();
     } catch (error) {
       console.error("Gagal memperbarui dokumen:", error);
       toast.error(error.message || "Gagal memperbarui dokumen.");

@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import usePerbaikiDokumen from "@/hooks/Backend/usePerbaikanDokumen";
 
 const KegiatanPertahananForm = ({ onSubmit, ID_Ajukan }) => {
-  const [handlePerbaikiDokumen, loading] = usePerbaikiDokumen();
+  const { handlePerbaikiDokumen, loading } = usePerbaikiDokumen();
   const [files, setFiles] = useState({});
   const handleFileChange = (e) => {
     const { name, files: selectedFiles } = e.target;

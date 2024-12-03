@@ -54,7 +54,6 @@ const KegiatanTarifPNBPForm = ({ onSubmit }) => {
               className="file:appearance-none file:bg-green-500 file:text-white file:px-4 file:py-2 file:border-none file:rounded file:cursor-pointer file:hover:bg-green-600"
               type="file"
               onChange={handleFileChange}
-              labelProps={{ className: "hidden" }}
             />
           </div>
           <div>
@@ -64,7 +63,6 @@ const KegiatanTarifPNBPForm = ({ onSubmit }) => {
               className="file:appearance-none file:bg-green-500 file:text-white file:px-4 file:py-2 file:border-none file:rounded file:cursor-pointer file:hover:bg-green-600"
               type="file"
               onChange={handleFileChange}
-              labelProps={{ className: "hidden" }}
             />
           </div>
         </div>

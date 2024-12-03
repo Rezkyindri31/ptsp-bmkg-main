@@ -1,7 +1,7 @@
 "use client";
 
 import { Typography } from "@/app/MTailwind";
-import { FaInstagram } from "react-icons/fa";
+import { FaInstagram, FaTelegramPlane, FaGlobe } from "react-icons/fa";
 
 function Footer() {
   return (
@@ -71,10 +71,24 @@ function Footer() {
             <FaInstagram
               size={20}
               className="cursor-pointer transform transition-transform duration-200 hover:scale-110"
-              onClick={() => window.open("https://www.instagram.com/infobmkg/")}
+              onClick={() =>
+                window.open("https://www.instagram.com/info_bmkg_bengkulu/")
+              }
             />
-            <FaInstagram size={20} />
-            <FaInstagram size={20} />
+            <FaTelegramPlane
+              size={20}
+              className="cursor-pointer transform transition-transform duration-200 hover:scale-110"
+              onClick={() =>
+                window.open(
+                  "https://l.instagram.com/?u=https%3A%2F%2Ft.me%2Fjoinchat%2FWKhKhIs5nORrQyOo&e=AT2_gidXz6KROzub3JWaazmiFwm01gfzeWlYi_zTkrKNkSNB5zIOUkpMh38ZbNK9NNBaGMlxvtSIrQxhtEXiNlwc6Ulz-QmS"
+                )
+              }
+            />
+            <FaGlobe
+              size={20}
+              className="cursor-pointer transform transition-transform duration-200 hover:scale-110"
+              onClick={() => window.open("https://bengkulu.bmkg.go.id/")}
+            />
           </div>
         </div>
       </div>

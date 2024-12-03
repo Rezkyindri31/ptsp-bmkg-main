@@ -27,7 +27,7 @@ const KegiatanSosialForm = ({ onSubmit }) => {
     setLoading(true);
 
     try {
-      await onSubmit(allFiles, "Kegiatan Soaial");
+      await onSubmit(allFiles, "Kegiatan Sosial");
       toast.success("File berhasil diunggah.");
     } catch (error) {
       toast.error("Terjadi kesalahan saat mengunggah file.");
