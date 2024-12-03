@@ -1,5 +1,7 @@
+"use client";
+
 import { Typography } from "@/app/MTailwind";
-import { FaChevronRight } from "react-icons/fa";
+import { FaInstagram } from "react-icons/fa";
 
 function Footer() {
   return (
@@ -66,9 +68,13 @@ function Footer() {
             . All Rights Reserved.
           </Typography>
           <div className="flex space-x-4 mt-4 md:mt-0">
-            <i className="fab fa-instagram"></i>
-            <i className="fab fa-facebook"></i>
-            <i className="fas fa-paper-plane"></i>
+            <FaInstagram
+              size={20}
+              className="cursor-pointer transform transition-transform duration-200 hover:scale-110"
+              onClick={() => window.open("https://www.instagram.com/infobmkg/")}
+            />
+            <FaInstagram size={20} />
+            <FaInstagram size={20} />
           </div>
         </div>
       </div>

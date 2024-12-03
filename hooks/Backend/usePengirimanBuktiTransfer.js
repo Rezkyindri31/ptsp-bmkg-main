@@ -88,11 +88,11 @@ const useBuatTransaksi = () => {
         Status_Pembayaran: "Sedang Ditinjau",
       });
 
-      if (transaksiDoc.exists() && transaksiDoc.data().Keterangan) {
-        await updateDoc(transaksiRef, {
+      if (pemesananDoc.exists() && pemesananDoc.data().Keterangan) {
+        await updateDoc(pemesananRef, {
           Keterangan: deleteField(),
         });
-        console.log("Field Keterangan berhasil dihapus");
+        console.log("Field Keterangan pada pemesanan berhasil dihapus");
       }
       toast.success("Bukti Transaksi berhasil dikirim!");
     } catch (err) {

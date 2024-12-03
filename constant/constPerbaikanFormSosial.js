@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import "@/app/globals.css";
+import { Input, Button } from "@material-tailwind/react";
 import { toast } from "react-toastify";
-import { Button } from "@material-tailwind/react";
+import usePerbaikiDokumen from "@/hooks/Backend/usePerbaikanDokumen";
 
-const PenanggulanganBencanaForm = ({ onSubmit }) => {
+const KegiatanSosialForm = ({ onSubmit, ID_Ajukan }) => {
+  const [handlePerbaikiDokumen, loading] = usePerbaikiDokumen();
   const [files, setFiles] = useState({});
-  const [loading, setLoading] = useState(false);
 
   const handleFileChange = (e) => {
     const { name, files: selectedFiles } = e.target;
@@ -23,35 +24,30 @@ const PenanggulanganBencanaForm = ({ onSubmit }) => {
       toast.error("Silakan pilih file untuk diunggah.");
       return;
     }
-    setLoading(true);
 
     try {
-      await onSubmit(allFiles, "Kegiatan Penanggulangan Bencana");
-      toast.success("File berhasil diunggah.");
+      await handlePerbaikiDokumen(ID_Ajukan, allFiles);
     } catch (error) {
-      toast.error("Terjadi kesalahan saat mengunggah file.");
-    } finally {
-      setLoading(false);
+      console.error("Gagal memperbarui dokumen:", error);
+      toast.error(error.message || "Gagal memperbarui dokumen.");
     }
   };
 
   return (
     <form
       onSubmit={handleFormSubmit}
-      className="section-penanggulanganbencana w-full max-w-7xl p-6 bg-gray-200 rounded-lg shadow-lg"
+      className="section-sosial w-full max-w-7xl p-6 bg-gray-200 rounded-lg shadow-lg"
     >
-      <h2 className="text-2xl font-semibold text-center mb-6">
-        Form Kegiatan Penanggulangan Bencana
-      </h2>
       <div className="mb-6">
-        <h3 className="text-xl font-semibold mb-4">Data Keperluan</h3>
         <div className="mb-4">
-          <p className="text-sm font-bold">Surat Pengantar Permintaan Data</p>
+          <p className="text-sm font-bold">
+            Surat Permintaan Ditandatangani Camat atau Pejabat Setingkat
+          </p>
           <input
-            name="SuratPengantar_PenanggulanganBencana"
-            onChange={handleFileChange}
-            type="file"
+            name="SuratPermintaan_Sosial"
             className="file:appearance-none file:bg-green-500 file:text-white file:px-4 file:py-2 file:border-none file:rounded file:cursor-pointer file:hover:bg-green-600"
+            type="file"
+            onChange={handleFileChange}
           />
         </div>
       </div>
@@ -70,4 +66,4 @@ const PenanggulanganBencanaForm = ({ onSubmit }) => {
   );
 };
 
-export default PenanggulanganBencanaForm;
+export default KegiatanSosialForm;

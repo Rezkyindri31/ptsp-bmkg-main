@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Input, Button } from "@material-tailwind/react";
+import "@/app/globals.css";
+import { Button } from "@material-tailwind/react";
 import { toast } from "react-toastify";
 
 const KegiatanPertahananForm = ({ onSubmit }) => {
@@ -48,12 +49,11 @@ const KegiatanPertahananForm = ({ onSubmit }) => {
           <p className="text-sm font-bold">
             Surat Permintaan Ditandatangani Camat atau Pejabat Setingkat
           </p>
-          <Input
+          <input
             name="SuratPermintaan_PertahananKeamanan"
-            className="input-custom"
+            className="file:appearance-none file:bg-green-500 file:text-white file:px-4 file:py-2 file:border-none file:rounded file:cursor-pointer file:hover:bg-green-600"
             type="file"
             onChange={handleFileChange}
-            labelProps={{ className: "hidden" }}
           />
         </div>
       </div>

@@ -113,7 +113,7 @@ const DialogPengirimanBuktiTransfer = ({
                   variant="paragraph"
                   className="text-red-800 uppercase font-bold"
                 >
-                  Perbaikan pada Dokumen
+                  Pengiriman Dokumen Transaksi
                 </Typography>
               </div>
               <hr className="border-[1px] text-red-800 mb-2"></hr>
@@ -122,7 +122,7 @@ const DialogPengirimanBuktiTransfer = ({
                 color="black"
                 className="font-semibold"
               >
-                {pemesanan.transaksiDetail.Keterangan}
+                {pemesanan.Keterangan}
               </Typography>
             </Alert>
           )}

@@ -24,14 +24,6 @@ function TampilanProfile() {
             <Typography variant="h4">Tampilan Profile Perusahaan</Typography>
           </div>
           <div className="grid grid-cols-2 text-center gap-y-3">
-            <div className="m-0">
-              <Typography variant="h6" className="mb-2">
-                Nomor Identitas
-              </Typography>
-              <Typography className="mb-2">
-                {detailPengguna?.No_Identitas}
-              </Typography>
-            </div>
             <div>
               <Typography variant="h6" className="mb-2">
                 Nama Lengkap
@@ -148,14 +140,6 @@ function TampilanProfile() {
             <Typography variant="h4">Tampilan Profile Perorangan</Typography>
           </div>
           <div className="grid grid-cols-2 text-center gap-y-6">
-            <div>
-              <Typography variant="h6" className="mb-2">
-                Nomor Identitas
-              </Typography>
-              <Typography className="mb-2">
-                {detailPengguna?.No_Identitas}
-              </Typography>
-            </div>
             <div>
               <Typography variant="h6" className="mb-2">
                 Nama Lengkap

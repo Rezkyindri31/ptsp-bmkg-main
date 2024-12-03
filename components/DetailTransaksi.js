@@ -168,7 +168,7 @@ const DetailTransaksi = ({ isOpen, onClose, pemesanan, userData }) => {
                       color="gray"
                       className="font-normal text-gray-600"
                     >
-                      Keterangan Ditolak: {pemesanan.transaksiDetail.Keterangan}
+                      Keterangan Ditolak: {pemesanan.Keterangan}
                     </Typography>
                   )}
                   {pemesanan.ajukanDetail.Jenis_Ajukan === "Berbayar" && (
@@ -437,7 +437,7 @@ const DetailTransaksi = ({ isOpen, onClose, pemesanan, userData }) => {
         open={bukaPerbaikanDokumen}
         onClose={() => setBukaPerbaikanDokumen(false)}
         ajukanID={pemesanan.ID_Ajukan}
-        keterangan={pemesanan.ajukanDetail.Keterangan}
+        Keterangan={pemesanan.ajukanDetail.Keterangan}
         namaAjukan={pemesanan.ajukanDetail.Nama_Ajukan}
       />
       <DialogInvoicePemesanan

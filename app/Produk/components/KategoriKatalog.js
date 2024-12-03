@@ -4,6 +4,7 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { KategoriProduk, KategoriJasa } from "@/constant/constKategoriProduk";
 import { IoArrowUndo } from "react-icons/io5";
+import { Typography } from "@material-tailwind/react";
 
 function Katalog() {
   const [pilihStasiun, setPilihComponent] = useState(null);
@@ -23,8 +24,28 @@ function Katalog() {
     </div>
   );
 
+  const marqueeAnimation = `
+    @keyframes marquee {
+      0% {
+        transform: translateX(-100%);
+      }
+      100% {
+        transform: translateX(100%);
+      }
+    }
+    .animate-marquee {
+      animation: marquee 7s linear infinite;
+    }
+  `;
+
   return (
     <div>
+      <div className="overflow-hidden w-full bg-gray-100 py-2">
+        <div className="inline-block whitespace-nowrap text-primary py-2 text-lg font-bold animate-marquee w-full shadow-sm text-center">
+          Produk yang Anda pesan akan menjadi Rp 0 jika mengambil jenis ajukan
+          gratis.
+        </div>
+      </div>
       {!pilihStasiun && (
         <section className="katalog-section">
           <div className="max-w-screen-xl mx-auto my-16 px-8 py-20 shadow-2xl rounded-lg border-2 border-gray">
@@ -136,6 +157,8 @@ function Katalog() {
           </div>
         )}
       </div>
+
+      <style jsx>{marqueeAnimation}</style>
     </div>
   );
 }
