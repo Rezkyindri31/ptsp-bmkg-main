@@ -105,14 +105,6 @@ const DialogPerbaikanDokumen = ({
     }
   };
 
-  const sectionComponents = {
-    // 2: <KegiatanKeagamaanForm onSubmit={handleFormSubmit} />,
-    // 3: <KegiatanSosialForm onSubmit={handleFormSubmit} />,
-    // 4: <KegiatanPertahananForm onSubmit={handleFormSubmit} />,
-    // 5: <KegiatanPemerintahanForm onSubmit={handleFormSubmit} />,
-    // 6: <KegiatanPendidikanPenelitianForm onSubmit={handleFormSubmit} />,
-    // 7: <KegiatanTarifPNBPForm onSubmit={handleFormSubmit} />,
-  };
   const { instructions, component } = getFormContent();
   return (
     <Dialog

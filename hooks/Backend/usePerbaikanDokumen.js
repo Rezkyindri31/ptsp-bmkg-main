@@ -35,7 +35,6 @@ const usePerbaikiDokumen = () => {
       const ajukanData = ajukanSnapshot.data();
       const storage = getStorage();
 
-      // If there are old files that need to be deleted
       if (ajukanData.File_Ajukan && ajukanData.File_Ajukan.length > 0) {
         for (let url of ajukanData.File_Ajukan) {
           const fileRef = ref(storage, url);
@@ -43,7 +42,6 @@ const usePerbaikiDokumen = () => {
         }
       }
 
-      // Upload new files
       const newFileUrls = [];
       for (let file of newFiles) {
         if (!SUPPORTED_FORMATS.includes(file.type)) {

@@ -23,8 +23,15 @@ import DialogUnduhDokumen from "@/components/UnduhDokumen";
 import DialogPengirimanBuktiTransfer from "@/components/PengirimanBuktiTransfer";
 import DialogInvoicePemesanan from "@/components/InvoicePemesanan";
 import constDetailTransaksi from "@/constant/constDetailTransaksi";
+import useInvoicePDF from "@/hooks/Backend/useInvoicePDF";
 
-const DetailTransaksi = ({ isOpen, onClose, pemesanan, userData }) => {
+const DetailTransaksi = ({
+  isOpen,
+  onClose,
+  pemesanan,
+  userData,
+  ajukanDetail,
+}) => {
   const {
     bukaPerbaikanDokumen,
     setBukaPerbaikanDokumen,
@@ -38,6 +45,7 @@ const DetailTransaksi = ({ isOpen, onClose, pemesanan, userData }) => {
     setBukaInvoicePemesanan,
   } = constDetailTransaksi();
   if (!pemesanan) return null;
+  const { handleDownload } = useInvoicePDF();
   return (
     <Dialog
       open={isOpen}
@@ -367,13 +375,24 @@ const DetailTransaksi = ({ isOpen, onClose, pemesanan, userData }) => {
                       ).toLocaleString()}
                     </Typography>
                   </div>
-                  <Button
-                    className="border-2 bg-white text-black"
-                    size="sm"
-                    onClick={() => setBukaInvoicePemesanan(true)}
-                  >
-                    Cek Invoice
-                  </Button>
+                  <div className="flex gap-2">
+                    <Button
+                      className="border-2 bg-white text-black"
+                      size="sm"
+                      onClick={() => setBukaInvoicePemesanan(true)}
+                    >
+                      Cek Invoice
+                    </Button>
+                    <Button
+                      className="border-2 bg-white text-black"
+                      size="sm"
+                      onClick={() =>
+                        handleDownload(pemesanan, userData, ajukanDetail)
+                      }
+                    >
+                      Unduh Invoice
+                    </Button>
+                  </div>
                 </div>
                 {pemesanan.Data_Keranjang.map((produk, index) => (
                   <div

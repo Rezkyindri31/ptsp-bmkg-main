@@ -14,7 +14,6 @@ const ListPesanan = () => {
   const { pemesananData, userData, loading, error } = useAmbilPemesanan();
   const [selectedPesanan, setSelectedPesanan] = useState(null);
   const [openDialog, setOpenDialog] = useState(false);
-
   if (loading) {
     return (
       <div>
@@ -141,6 +140,7 @@ const ListPesanan = () => {
         onClose={() => setOpenDialog(false)}
         pemesanan={selectedPesanan?.pemesanan}
         userData={userData}
+        ajukanDetail={selectedPesanan?.pemesanan?.ajukanDetail}
       />
     </div>
   );
