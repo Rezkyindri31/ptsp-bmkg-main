@@ -1,5 +1,5 @@
-// components/UserProfile.js
 import React from "react";
+import DOMPurify from "dompurify";
 import { Typography, Input, Button } from "@/app/MTailwind";
 import useVerifikasiLogin from "@/hooks/Backend/useVerifikasiLogin";
 import useEditProfile from "@/hooks/Backend/useEditProfile";
@@ -20,21 +20,20 @@ function EditProfile() {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    const sanitizedValue = DOMPurify.sanitize(value);
 
     if (name === "NPWP_Perusahaan") {
-      const formattedInputNPWP = formatNPWP(value);
-      tanganiGantiPengguna({ target: { name, value: formattedInputNPWP } });
-      return;
-    }
-
-    if (name === "No_Identitas") {
-      const formattedInputNoIdentitas = formatNoIdentitas(value);
       tanganiGantiPengguna({
-        target: { name, value: formattedInputNoIdentitas },
+        target: { name, value: formatNPWP(sanitizedValue) },
       });
       return;
     }
-
+    if (name === "No_Identitas") {
+      tanganiGantiPengguna({
+        target: { name, value: formatNoIdentitas(sanitizedValue) },
+      });
+      return;
+    }
     if (
       [
         "Pekerjaan",
@@ -44,18 +43,19 @@ function EditProfile() {
         "Kabupaten_Kota_Perusahaan",
       ].includes(name)
     ) {
-      const formattedInput = formatHuruf(value);
-      tanganiGantiPengguna({ target: { name, value: formattedInput } });
+      tanganiGantiPengguna({
+        target: { name, value: formatHuruf(sanitizedValue) },
+      });
       return;
     }
-
     if (["No_Hp", "No_Hp_Perusahaan"].includes(name)) {
-      const formattedInputNoHP = formatNoTelepon(value);
-      tanganiGantiPengguna({ target: { name, value: formattedInputNoHP } });
+      tanganiGantiPengguna({
+        target: { name, value: formatNoTelepon(sanitizedValue) },
+      });
       return;
     }
 
-    tanganiGantiPengguna({ target: { name, value } });
+    tanganiGantiPengguna({ target: { name, value: sanitizedValue } });
   };
 
   return (
@@ -118,7 +118,14 @@ function EditProfile() {
               <select
                 name="Jenis_Kelamin"
                 value={editedDetailPengguna.Jenis_Kelamin || ""}
-                onChange={handleInputChange}
+                onChange={(e) =>
+                  tanganiGantiPengguna({
+                    target: {
+                      name: e.target.name,
+                      value: DOMPurify.sanitize(e.target.value),
+                    },
+                  })
+                }
                 className="block w-full mt-1 p-2 border rounded-lg text-gray-500 input-custom"
               >
                 <option value="" disabled>

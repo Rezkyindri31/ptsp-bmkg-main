@@ -1,5 +1,5 @@
-// components/UserProfile.js
 import React from "react";
+import DOMPurify from "dompurify";
 import { Typography, Input, Button } from "@/app/MTailwind";
 import useVerifikasiLogin from "@/hooks/Backend/useVerifikasiLogin";
 import useEditProfile from "@/hooks/Backend/useEditProfile";
@@ -19,8 +19,10 @@ function EditProfile() {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    const sanitizedValue = DOMPurify.sanitize(value);
+
     if (name === "No_Identitas") {
-      const formattedInputNoIdentitas = formatNoIdentitas(value);
+      const formattedInputNoIdentitas = formatNoIdentitas(sanitizedValue);
       tanganiGantiPengguna({
         target: { name, value: formattedInputNoIdentitas },
       });
@@ -28,18 +30,18 @@ function EditProfile() {
     }
 
     if (["Pekerjaan", "Nama_Lengkap"].includes(name)) {
-      const formattedInput = formatHuruf(value);
+      const formattedInput = formatHuruf(sanitizedValue);
       tanganiGantiPengguna({ target: { name, value: formattedInput } });
       return;
     }
 
-    if (["No_Hp"].includes(name)) {
-      const formattedInputNoHP = formatNoTelepon(value);
+    if (name === "No_Hp") {
+      const formattedInputNoHP = formatNoTelepon(sanitizedValue);
       tanganiGantiPengguna({ target: { name, value: formattedInputNoHP } });
       return;
     }
 
-    tanganiGantiPengguna({ target: { name, value } });
+    tanganiGantiPengguna({ target: { name, value: sanitizedValue } });
   };
 
   return (
@@ -102,7 +104,14 @@ function EditProfile() {
               <select
                 name="Jenis_Kelamin"
                 value={editedDetailPengguna.Jenis_Kelamin || ""}
-                onChange={handleInputChange}
+                onChange={(e) =>
+                  tanganiGantiPengguna({
+                    target: {
+                      name: e.target.name,
+                      value: DOMPurify.sanitize(e.target.value),
+                    },
+                  })
+                }
                 className="block w-full mt-1 p-2 border rounded-lg text-gray-500 input-custom"
               >
                 <option value="" disabled>

@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
+import DOMPurify from "dompurify";
 import { firestore } from "@/lib/firebaseConfig";
 import { doc, updateDoc } from "firebase/firestore";
 import toast from "react-hot-toast";
@@ -13,9 +14,10 @@ function useEditProfile(inisialisasiDataProfil = {}) {
 
   const tanganiGantiPengguna = useCallback((e) => {
     const { name, value } = e.target;
+    const sanitizedValue = DOMPurify.sanitize(value);
     setDetailPengguna((prevDetail) => ({
       ...prevDetail,
-      [name]: value,
+      [name]: sanitizedValue,
     }));
   }, []);
 
